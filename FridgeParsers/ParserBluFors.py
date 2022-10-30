@@ -86,7 +86,10 @@ class ParserBluFors(ParserGeneral):
                         ret_params[cur_db] = []
                     for cur_line in relevantLines:
                         if len(cur_param['location']) == 3:
-                            cur_val = float(cur_line[1][cur_line[1].index(cur_param['location'][1])+cur_param['location'][2]])
+                            if cur_param['location'][1] in cur_line[1]:
+                                cur_val = float(cur_line[1][cur_line[1].index(cur_param['location'][1])+cur_param['location'][2]])
+                            else:
+                                continue
                         else:
                             cur_val = float(cur_line[1][-1])
                         ret_params[cur_db] += [(cur_line[0], cur_val)]

@@ -1,4 +1,4 @@
-# SQDFridgeLog - a Dilution Fridge Monitor
+# SQDFridgeLog - a Dilution Fridge Logger
 
 SQDFridgeLog is a fridge logging software that consolidates the automated logs from computers interfacing with dilution fridges.
 
