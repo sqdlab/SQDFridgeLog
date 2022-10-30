@@ -39,12 +39,12 @@ class FridgeDatabase:
         cur = db.cursor()
         
         #Get tables currently in database
-        cur.execute(f'SELECT name from sqlite_master where type= "table"')
+        cur.execute('SELECT name from sqlite_master where type= "table"')
         cur_tables = [x[0] for x in cur.fetchall()]
         last_table_times = {}
         #Fetch last time-stamps
         for cur_table in cur_tables:
-            cur.execute(f'SELECT * FROM {cur_table} ORDER BY time DESC LIMIT 1;')
+            cur.execute('SELECT * FROM {0} ORDER BY time DESC LIMIT 1;'.format(cur_table))
             last_time = cur.fetchall()
             if len(last_time) == 0:
                 last_time = datetime.datetime(1900,1,1)
@@ -57,7 +57,7 @@ class FridgeDatabase:
         for cur_dbTable in new_data:
             for cur_entry in new_data[cur_dbTable]:
                 try:
-                    cur.execute(f'insert into {cur_dbTable} values ({self._datetime_to_sqlstr(cur_entry[0])}, {cur_entry[1]})')
+                    cur.execute('insert into {0} values ({1}, {2})'.format(cur_dbTable, self._datetime_to_sqlstr(cur_entry[0]), cur_entry[1]))
                 except:
                     continue
 
@@ -76,5 +76,5 @@ class FridgeDatabase:
                 else:
                     disp = '|'
                 time.sleep(1)
-                print(f'Last Updated: {last_time} {disp}', end="\r")
+                print('Last Updated: {0} {1}'.format(last_time, disp), end="\r")
 
