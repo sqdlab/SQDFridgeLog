@@ -42,7 +42,11 @@ class ParserOxfordVC(ParserGeneral):
 
     def getNewData(self, lastTimeStamps={}):
         #Since it's fully tabular, all values are recorded in the same time-stamp - so just take minimum...
-        lastTimeStamp = min([lastTimeStamps[x] for x in lastTimeStamps])
+        rec_time_stamps = [lastTimeStamps[x] for x in lastTimeStamps if lastTimeStamps[x].year > 2000]
+        if len(rec_time_stamps) == 0:
+            lastTimeStamp = datetime.datetime(1900,1,1)
+        else:
+            lastTimeStamp = min(rec_time_stamps)
 
         #Get log folders present
         cur_files = [self._log_dir + name for name in os.listdir(self._log_dir) if name.endswith('.vcl')]
