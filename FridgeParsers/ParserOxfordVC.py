@@ -36,6 +36,8 @@ class ParserOxfordVC(ParserGeneral):
                 elif int(round(data[i] / dt.itemsize)) != data_item_size:
                     raise RuntimeError('Inconsistent data: some records are faulty')
                 i += int(round(data[i] / dt.itemsize))
+            if data.size == 0:
+                return [], []
             return titles, data.reshape((data_item_size, -1), order='F')[1:(len(titles) + 1)]
 
         with open(filename, 'rb') as f_in:
@@ -76,6 +78,8 @@ class ParserOxfordVC(ParserGeneral):
         for _, cur_file in cur_file_ts:
             #Titles appear on rows...
             titles, data = self._parse_with_numpy(cur_file)
+            if len(titles) == 0:
+                continue
             time_stamps = [datetime.datetime.fromtimestamp(x) for x in data[1]]
             sel_inds = [m for m in range(len(time_stamps)) if time_stamps[m] >= lastTimeStamp]
             total_len += len(sel_inds)
