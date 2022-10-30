@@ -1,0 +1,114 @@
+{
+    "parser" : "OxfordVC",
+    "parameters":
+    {
+        "Water Inlet Temperature" :
+        {
+            "db" : "tempWaterInlet",
+            "location" : "Input Water Temp",
+            "unit" : "°C"
+        },
+        "Water Outlet Temperature" :
+        {
+            "db" : "tempWaterOutlet",
+            "location" : "Output Water Temp",
+            "unit" : "°C"
+        },
+        "Helium Temperature" :
+        {
+            "db" : "tempHe",
+            "location" : "Helium Temp",
+            "unit" : "°C"
+        },
+        "Oil Temperature" :
+        {
+            "db" : "tempOil",
+            "location" : "Oil Temp",
+            "unit" : "°C"
+        },
+        "Condense Pressure" :
+        {
+            "db" : "Pcond",
+            "location" : "PressureM1Condense(Bar)",
+            "unit" : "Bar"
+        },
+        "Tank Pressure" :
+        {
+            "db" : "Ptank",
+            "location" : "PressureM3Tank(Bar)",
+            "unit" : "Bar"
+        },
+        "Still Pressure" :
+        {
+            "db" : "Pstill",
+            "location" : "Still (mbar)",
+            "unit" : "mBar"
+        },
+        "OVC Pressure" :
+        {
+            "db" : "Povc",
+            "location" : "Dewar (mbar)",
+            "unit" : "mBar"
+        },
+        "Forepump Pressure" :
+        {
+            "db" : "Pforepump",
+            "location" : "Forepump (mbar)",
+            "unit" : "mBar"
+        },
+        "Compressor Current" :
+        {
+            "db" : "CompCurrent",
+            "location" : "Motor Current",
+            "unit" : "A"
+        },
+        "MC Temperature (RuOx)" :
+        {
+            "db" : "tempColdMCRuOx",
+            "location" : "MC RuOx T(K)",
+            "unit" : "K"
+        },
+        "MC Temperature (Cernox)" :
+        {
+            "db" : "tempColdMCCernox",
+            "location" : "MC Cernox T(K)",
+            "unit" : "K"
+        },
+        "Cold Plate Temperature" :
+        {
+            "db" : "tempColdPlate",
+            "location" : "Cold Plate T(K)",
+            "unit" : "K"
+        },
+        "Still Temperature" :
+        {
+            "db" : "tempColdStill",
+            "location" : "Still T(K)",
+            "unit" : "K"
+        },
+        "4K Temperature" :
+        {
+            "db" : "tempCold4K",
+            "location" : "4 K Plate T(K)",
+            "unit" : "K"
+        },
+        "70K Temperature" :
+        {
+            "db" : "tempCold70K",
+            "location" : "70 K Plate T(K)",
+            "unit" : "K"
+        },
+        "4K Temperature (Head)" :
+        {
+            "db" : "temp4K",
+            "location" : "4 K Head T(K)",
+            "unit" : "K"
+        },
+        "70K Temperature (Head)" :
+        {
+            "db" : "temp70K",
+            "location" : "70 K Head T(K)",
+            "unit" : "K"
+        }
+    }
+}

@@ -1,0 +1,96 @@
+{
+    "parser" : "BluFors",
+    "parameters":
+    {
+        "Water Inlet Temperature" :
+        {
+            "db" : "tempWaterInlet",
+            "location" : ["Status", "cpatempwi", 1],
+            "unit" : "°C"
+        },
+        "Water Outlet Temperature" :
+        {
+            "db" : "tempWaterOutlet",
+            "location" : ["Status", "cpatempwo", 1],
+            "unit" : "°C"
+        },
+        "Oil Temperature" :
+        {
+            "db" : "tempOil",
+            "location" : ["Status", "cpatempo", 1],
+            "unit" : "°C"
+        },
+        "Compressor Current" :
+        {
+            "db" : "CompCurrent",
+            "location" : ["Status", "cpacurrent", 1],
+            "unit" : "A"
+        },
+        "OVC Pressure" :
+        {
+            "db" : "Povc",
+            "location" : ["maxigauge", "CH1", 3],
+            "unit" : "mBar"
+        },
+        "Still Pressure" :
+        {
+            "db" : "Pstill",
+            "location" : ["maxigauge", "CH2", 3],
+            "unit" : "mBar"
+        },
+        "Condensing Pressure" :
+        {
+            "db" : "Pcond",
+            "location" : ["maxigauge", "CH3", 3],
+            "unit" : "mBar"
+        },
+        "Pre-Trap Pressure" :
+        {
+            "db" : "Ppretrap",
+            "location" : ["maxigauge", "CH4", 3],
+            "unit" : "mBar"
+        },
+        "Tank Pressure" :
+        {
+            "db" : "Ptank",
+            "location" : ["maxigauge", "CH5", 3],
+            "unit" : "mBar"
+        },
+        "Scroll-Pump Pressure" :
+        {
+            "db" : "Pscroll",
+            "location" : ["maxigauge", "CH6", 3],
+            "unit" : "mBar"
+        },
+        "Flowmeter" :
+        {
+            "db" : "tempFlow",
+            "location" : ["Flowmeter"],
+            "unit" : "mmol/s"
+        },
+        "MC Temperature" :
+        {
+            "db" : "tempColdMC",
+            "location" : ["CH6 T"],
+            "unit" : "K"
+        },
+        "Still Temperature" :
+        {
+            "db" : "tempColdStill",
+            "location" : ["CH5 T"],
+            "unit" : "K"
+        },
+        "4K Temperature" :
+        {
+            "db" : "tempCold4K",
+            "location" : ["CH2 T"],
+            "unit" : "K"
+        },
+        "50K Temperature" :
+        {
+            "db" : "tempCold50K",
+            "location" : ["CH1 T"],
+            "unit" : "K"
+        }
+    }
+}
