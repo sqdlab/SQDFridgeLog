@@ -15,4 +15,4 @@ else:
     assert False, "Fridge type {0} unsupported!".format(confs['Fridge Type'])
 
 fdb = FridgeDatabase(confs['Database File Path'], fridgeParser)
-fdb.update_continuously()
+fdb.update_continuously(confs.get('Polling Interval', 30))

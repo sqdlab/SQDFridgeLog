@@ -42,7 +42,7 @@ Note the following about the parameters:
 - `"Fridge Log Location"` - the folder where the actual log files live. For example, in the BluFors logs, this folder contains the time-stamped folders (e.g. `'22-04-10'`) containing the individual log files. For the Oxford fridges, this would be the folder where all the `.vcl` files live.
 - `"Database File Path"` - the full file path to the database file (the script will create one if it does not exist - **ensure it is a unique file name**).
 - `"Fridge Type"` - the parser used to interpret the log files (currently supports `"OxfordVC"` and `"BluFors"`)
-- `"Polling Interval"` - the database update time given in seconds (i.e. database is updated every 30s in the above example)
+- `"Polling Interval"` - the database update time given in seconds (i.e. database is updated every 30s in the above example). If this is not supplied, it defaults to 30s.
 
 ## Usage
 
