@@ -18,6 +18,7 @@ class ParserOxfordVC(ParserGeneral):
             self._config_data = json.load(json_file)
 
     def _parse_with_numpy(self, filename, MAX_CHANNELS_COUNT = 52):
+        #print(filename)
         #Code adapted from: https://github.com/StSav012/VeriCold_log_parser
         def _parse(file_handle):
             file_handle.seek(0x1800 + 32)
@@ -41,12 +42,9 @@ class ParserOxfordVC(ParserGeneral):
             return _parse(f_in)
 
     def getNewData(self, lastTimeStamps={}):
-        #Since it's fully tabular, all values are recorded in the same time-stamp - so just take minimum...
-        rec_time_stamps = [lastTimeStamps[x] for x in lastTimeStamps if lastTimeStamps[x].year > 2000]
-        if len(rec_time_stamps) == 0:
-            lastTimeStamp = datetime.datetime(1900,1,1)
-        else:
-            lastTimeStamp = min(rec_time_stamps)
+        #Since it's fully tabular, all values are recorded in the same time-stamp - so just take last one...
+        #All tables should be updated anyway given that the commit is done after executing all commands so...
+        lastTimeStamp = max([lastTimeStamps[x] for x in lastTimeStamps])
 
         #Get log folders present
         cur_files = [self._log_dir + name for name in os.listdir(self._log_dir) if name.endswith('.vcl')]
