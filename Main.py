@@ -12,7 +12,7 @@ if confs['Fridge Type'] == 'OxfordVC':
 elif confs['Fridge Type'] == 'BluFors':
     fridgeParser = ParserBluFors('FridgeParameters/BluFors.json', confs['Fridge Log Location'])
 else:
-    assert False, f"Fridge type {confs['Fridge Type']} unsupported!"
+    assert False, "Fridge type {0} unsupported!".format(confs['Fridge Type'])
 
 fdb = FridgeDatabase(confs['Database File Path'], fridgeParser)
 fdb.update_continuously()

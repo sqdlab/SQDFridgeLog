@@ -19,10 +19,10 @@ class FridgeDatabase:
         db = sqlite3.connect(self._dbfile)
         cur = db.cursor()
         for cur_table in cur_tables:
-            cmd = f"CREATE TABLE IF NOT EXISTS {cur_table} (  \
+            cmd = "CREATE TABLE IF NOT EXISTS {0} (  \
                 time TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL UNIQUE,    \
                 value REAL DEFAULT NULL    \
-            )"
+            )".format(cur_table)
             cur.execute(cmd)
         db.commit()
         db.close()
