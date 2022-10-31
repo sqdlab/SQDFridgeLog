@@ -20,7 +20,7 @@ class FridgeDatabase:
         cur = db.cursor()
         for cur_table in cur_tables:
             cmd = "CREATE TABLE IF NOT EXISTS {0} (  \
-                time TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL UNIQUE,    \
+                time INTEGER DEFAULT 0 NOT NULL UNIQUE,    \
                 value REAL DEFAULT NULL    \
             )".format(cur_table)
             cur.execute(cmd)
@@ -29,10 +29,14 @@ class FridgeDatabase:
         a=0
 
     def _datetime_to_sqlstr(self, objDateTime):
-       return '\'' + str(objDateTime).replace(' ','T') + '\''
+    #    return '\'' + str(objDateTime).replace(' ','T') + '\''
+        epoch = datetime.datetime.utcfromtimestamp(0)
+        return int((objDateTime - epoch).total_seconds())
+
 
     def _sqlstr_to_datetime(self, strDateTime):
-       return datetime.datetime(*[int(x) for x in strDateTime.replace('T',' ').replace(' ','-').replace(':','-').split('-')])
+    #    return datetime.datetime(*[int(x) for x in strDateTime.replace('T',' ').replace(' ','-').replace(':','-').split('-')])
+        return datetime.datetime.fromtimestamp(strDateTime)
     
     def _update(self):
         db = sqlite3.connect(self._dbfile)
