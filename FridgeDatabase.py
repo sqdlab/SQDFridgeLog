@@ -30,8 +30,7 @@ class FridgeDatabase:
 
     def _datetime_to_sqlstr(self, objDateTime):
     #    return '\'' + str(objDateTime).replace(' ','T') + '\''
-        epoch = datetime.datetime.utcfromtimestamp(0)
-        return int((objDateTime - epoch).total_seconds())
+        return int(time.mktime(objDateTime.timetuple()))     #Convert to unix time-stamp
 
 
     def _sqlstr_to_datetime(self, strDateTime):
@@ -60,10 +59,7 @@ class FridgeDatabase:
         
         for cur_dbTable in new_data:
             for cur_entry in new_data[cur_dbTable]:
-                try:
-                    cur.execute('insert into {0} values ({1}, {2})'.format(cur_dbTable, self._datetime_to_sqlstr(cur_entry[0]), cur_entry[1]))
-                except:
-                    continue
+                cur.execute('insert into {0} values ({1}, {2})'.format(cur_dbTable, self._datetime_to_sqlstr(cur_entry[0]), cur_entry[1]))
 
         db.commit()
         db.close()

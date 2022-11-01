@@ -44,10 +44,11 @@ class ParserBluFors(ParserGeneral):
                     continue
                 if lastTimeStamp.year > year:
                     continue
-                if lastTimeStamp.month > month:
-                    continue
-                if lastTimeStamp.day > day:
-                    continue
+                if lastTimeStamp.year == year:
+                    if lastTimeStamp.month > month:
+                        continue
+                    if lastTimeStamp.month == month and lastTimeStamp.day > day:
+                        continue
                 cur_folders += [cur_folder]
             cur_folders = sorted(cur_folders)
 
