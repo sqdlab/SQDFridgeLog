@@ -80,7 +80,7 @@ class ParserOxfordVC(ParserGeneral):
             titles, data = self._parse_with_numpy(cur_file)
             if len(titles) == 0:
                 continue
-            time_stamps = [datetime.datetime.fromtimestamp(x) for x in data[1]]
+            time_stamps = [datetime.datetime.fromtimestamp(np.round(x)) for x in data[1]]
             sel_inds = [m for m in range(len(time_stamps)) if time_stamps[m] > lastTimeStamp]
             total_len += len(sel_inds)
             if total_len + len(sel_inds) > max_per_upload:

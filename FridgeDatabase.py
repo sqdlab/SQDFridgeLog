@@ -62,7 +62,10 @@ class FridgeDatabase:
             for cur_entry in new_data[cur_dbTable]:
                 if not np.isfinite(cur_entry[1]):
                     continue
-                cur.execute('insert into {0} values ({1}, {2})'.format(cur_dbTable, self._datetime_to_sqlstr(cur_entry[0]), cur_entry[1]))
+                try:
+                    cur.execute('insert into {0} values ({1}, {2})'.format(cur_dbTable, self._datetime_to_sqlstr(cur_entry[0]), cur_entry[1]))
+                except:
+                    continue
 
         db.commit()
         db.close()
