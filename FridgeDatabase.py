@@ -25,7 +25,10 @@ class FridgeDatabase:
                 value REAL DEFAULT NULL    \
             )".format(cur_table)
             cur.execute(cmd)
-        db.commit()
+        try:
+            db.commit()
+        except:
+            print("Database locked - will try updating next round.")
         db.close()
         a=0
 
