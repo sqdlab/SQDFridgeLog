@@ -65,12 +65,15 @@ class FridgeDatabase:
             for cur_entry in new_data[cur_dbTable]:
                 if not np.isfinite(cur_entry[1]):
                     continue
-                try:
+                try:    #Mainly for uniqueness issues... Happens because of integer POSIX vs. real POSIX...
                     cur.execute('insert into {0} values ({1}, {2})'.format(cur_dbTable, self._datetime_to_sqlstr(cur_entry[0]), cur_entry[1]))
                 except:
                     continue
 
-        db.commit()
+        try:
+            db.commit()
+        except:
+            print("Database locked - will try updating next round.")
         db.close()
 
     def update_continuously(self, poll_delay_seconds=30):
