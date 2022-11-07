@@ -1,6 +1,10 @@
 from FridgeParsers.ParserBluFors import ParserBluFors
 from FridgeParsers.ParserOxfordVC import ParserOxfordVC
-from FridgeDatabase import FridgeDatabase
+MySQLsupport = True
+try:
+    from FridgeDatabaseMySQL import FridgeDatabaseMySQL
+except ImportError:
+    MySQLsupport = False
 import os, json
 
 assert os.path.exists('config.json'), "Must create config.json first - please read Installation Instructions in Readme.md!"
@@ -14,5 +18,9 @@ elif confs['Fridge Type'] == 'BluFors':
 else:
     assert False, "Fridge type {0} unsupported!".format(confs['Fridge Type'])
 
-fdb = FridgeDatabase(confs['Database File Path'], fridgeParser)
+if "Database File Path" in confs:
+    fdb = FridgeDatabaseMySQL(confs['Database File Path'], fridgeParser)
+else:
+    assert MySQLsupport, "Must install mysql.connector.python from pip."
+    fdb = FridgeDatabaseMySQL(confs['Database'], fridgeParser)
 fdb.update_continuously(confs.get('Polling Interval', 30))
