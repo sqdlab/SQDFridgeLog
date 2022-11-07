@@ -22,5 +22,5 @@ if "Database File Path" in confs:
     fdb = FridgeDatabaseMySQL(confs['Database File Path'], fridgeParser)
 else:
     assert MySQLsupport, "Must install mysql.connector.python from pip."
-    fdb = FridgeDatabaseMySQL(confs['Database'], fridgeParser)
+    fdb = FridgeDatabaseMySQL(confs, fridgeParser)
 fdb.update_continuously(confs.get('Polling Interval', 30))

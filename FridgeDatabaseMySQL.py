@@ -5,8 +5,9 @@ import os
 import numpy as np
 
 class FridgeDatabaseMySQL:
-    def __init__(self, db_name, fridgeParser):
-        self._dbname = db_name.lower()
+    def __init__(self, confs, fridgeParser):
+        self._dbname = confs['Database'].lower()
+        self._confs = confs
         self._fridgeParser = fridgeParser
         
         #Write database metadata
@@ -15,8 +16,8 @@ class FridgeDatabaseMySQL:
         #Get database table names for each required parameter...
         cur_tables = fridgeParser.getDBtables()
         #
-        db = mysql.connector.connect(user='main', password='mainpass',
-                                     host='10.42.95.10',buffered=True)
+        db = mysql.connector.connect(user=self._confs["User"], password=self._confs["Password"],
+                                     host=self._confs["Host"],buffered=True)
         cur = db.cursor()
         cur.execute("show databases")
         dbs = [databases[0] for databases in cur]
@@ -44,8 +45,8 @@ class FridgeDatabaseMySQL:
         return datetime.datetime.fromtimestamp(strDateTime)
     
     def _update(self):
-        db = mysql.connector.connect(user='main', password='mainpass',
-                                     host='10.42.95.10',buffered=True)
+        db = mysql.connector.connect(user=self._confs["User"], password=self._confs["Password"],
+                                     host=self._confs["Host"],buffered=True)
         cur = db.cursor()
         cur.execute("USE {0};".format(self._dbname))
         
@@ -69,6 +70,8 @@ class FridgeDatabaseMySQL:
             # try:    #Mainly for uniqueness issues... Happens because of integer POSIX vs. real POSIX...
             sql ="INSERT INTO {0}(time,value) VALUES (%s, %s)".format(cur_dbTable)
             batches = [str((self._datetime_to_sqlstr(x[0]), x[1])) for x in new_data[cur_dbTable] if np.isfinite(x[1])]
+            if len(batches) == 0:
+                continue
             # cur.executemany(sql, batches)
             strE = "INSERT INTO {0}(time,value) VALUES ".format(cur_dbTable) + ','.join(batches)
             cur.execute(strE)
