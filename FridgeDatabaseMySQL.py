@@ -68,12 +68,12 @@ class FridgeDatabaseMySQL:
         
         for cur_dbTable in new_data:
             # try:    #Mainly for uniqueness issues... Happens because of integer POSIX vs. real POSIX...
-            sql ="INSERT INTO {0}(time,value) VALUES (%s, %s)".format(cur_dbTable)
+            # sql ="INSERT INTO {0}(time,value) VALUES (%s, %s)".format(cur_dbTable)
             batches = [str((self._datetime_to_sqlstr(x[0]), x[1])) for x in new_data[cur_dbTable] if np.isfinite(x[1])]
             if len(batches) == 0:
                 continue
             # cur.executemany(sql, batches)
-            strE = "INSERT INTO {0}(time,value) VALUES ".format(cur_dbTable) + ','.join(batches)
+            strE = "INSERT IGNORE INTO {0}(time,value) VALUES ".format(cur_dbTable) + ','.join(batches)
             cur.execute(strE)
             db.commit()
             # except:
