@@ -12,9 +12,9 @@ with open('config.json') as json_file:
     confs = json.load(json_file)
 
 if confs['Fridge Type'] == 'OxfordVC':
-    fridgeParser = ParserOxfordVC('FridgeParameters/OxfordVC.json', confs['Fridge Log Location'])
+    fridgeParser = ParserOxfordVC('FridgeParameters/OxfordVC.json', confs['Fridge Log Location'], confs.get("Lowercase", False))
 elif confs['Fridge Type'] == 'BluFors':
-    fridgeParser = ParserBluFors('FridgeParameters/BluFors.json', confs['Fridge Log Location'])
+    fridgeParser = ParserBluFors('FridgeParameters/BluFors.json', confs['Fridge Log Location'], confs.get("Lowercase", False))
 else:
     assert False, "Fridge type {0} unsupported!".format(confs['Fridge Type'])
 

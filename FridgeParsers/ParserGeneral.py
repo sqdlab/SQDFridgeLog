@@ -18,3 +18,10 @@ class ParserGeneral:
         json_data = {self._config_data['parameters'][x]['db'] : {'label': x, 'unit' : self._config_data['parameters'][x].get('unit','')} for x in self._config_data['parameters']}
         with open(dirName + fileName + '.json', 'w') as outfile:
             json.dump(json_data, outfile, indent=4)
+
+    def load_config_JSON(self, config_file, lowercase_names = False):
+        with open(config_file) as json_file:
+            self._config_data = json.load(json_file)
+        if lowercase_names:
+            for cur_param in self._config_data['parameters']:
+                self._config_data['parameters'][cur_param]['db'] = self._config_data['parameters'][cur_param]['db'].lower()

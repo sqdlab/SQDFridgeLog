@@ -4,7 +4,7 @@ import os
 import datetime
 
 class ParserBluFors(ParserGeneral):
-    def __init__(self, config_file, log_directory):
+    def __init__(self, config_file, log_directory, lowercase_names = False):
         self._log_dir = log_directory
         self._log_dir = self._log_dir.replace('\\','/')
         if self._log_dir[-1] != '/':
@@ -16,8 +16,7 @@ class ParserBluFors(ParserGeneral):
         #
         #If it is given as ["CH6"], then it's just time-value and thus, the value after the last
         #comma is taken...
-        with open(config_file) as json_file:
-            self._config_data = json.load(json_file)
+        self.load_config_JSON(config_file, lowercase_names)
         
     def getNewData(self, lastTimeStamps={}):
         #Presume that data is strictly stored in time-stamped folders 

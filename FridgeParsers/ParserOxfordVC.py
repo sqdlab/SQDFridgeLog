@@ -7,15 +7,14 @@ import numpy as np
 import datetime
 
 class ParserOxfordVC(ParserGeneral):
-    def __init__(self, config_file, log_directory):
+    def __init__(self, config_file, log_directory, lowercase_names = False):
         self._log_dir = log_directory
         self._log_dir = self._log_dir.replace('\\','/')
         if self._log_dir[-1] != '/':
             self._log_dir = self._log_dir + '/'
 
         #Get configuration data - value for a key is given as the data entry title when parsing the vcl file
-        with open(config_file) as json_file:
-            self._config_data = json.load(json_file)
+        self.load_config_JSON(config_file, lowercase_names)
 
     def _parse_with_numpy(self, filename, MAX_CHANNELS_COUNT = 52):
         #print(filename)
