@@ -20,6 +20,12 @@
             "location" : ["Status", "cpatempo", 1],
             "unit" : "°C"
         },
+        "Helium Temperature" :
+        {
+            "db" : "tempHe",
+            "location" : ["Status", "cpatemph", 1],
+            "unit" : "°C"
+        },
         "Compressor Current" :
         {
             "db" : "CompCurrent",
